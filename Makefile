@@ -12,14 +12,26 @@ endif
 
 OBJS1 = $(OBJS) lsow.o
 OBJS2 = $(OBJS) digitemp_evil.o devices/common.o devices/ds18x20.o
+OBJS3 = $(OBJS) rw1990.o devices/common.o
+OBJS4 = $(OBJS) ds1990.o devices/common.o
+OBJS5 = $(OBJS) rw2004.o devices/common.o
 
-all: lsow digitemp_evil
+all: lsow digitemp_evil rw1990 ds1990 rw2004
 
 lsow: $(OBJS1)
 	$(CC) -static -O3 -o $@ $(OBJS1)
 
 digitemp_evil: $(OBJS2)
 	$(CC) -static -O3 -o $@ $(OBJS2)
+
+rw1990: $(OBJS3)
+	$(CC) -static -O3 -o $@ $(OBJS3)
+
+ds1990: $(OBJS4)
+	$(CC) -static -O3 -o $@ $(OBJS4)
+
+rw2004: $(OBJS5)
+	$(CC) -static -O3 -o $@ $(OBJS5)
 
 %.o: %.c
 	$(CC) -c -Wall -O3 -o $@ $<
