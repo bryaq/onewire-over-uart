@@ -5,3 +5,8 @@ rw1990
 rw2004
 *.o
 *.html
+*~
+*.exe
+.vs
+Debug
+Release

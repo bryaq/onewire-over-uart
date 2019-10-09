@@ -1,5 +1,4 @@
 #include <inttypes.h>
-#include <time.h>
 
 #define CRC8POLY 0x18 // 0x18 = X ^ 8 + X ^ 5 + X ^ 4 + X ^ 0
 
@@ -50,10 +49,20 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <time.h>
+#endif
+
 void delay_ms(uint32_t ms) {
+#ifdef _WIN32
+  Sleep(ms);
+#else
   struct timespec tv = {
     .tv_sec  = ms / 1000,
     .tv_nsec = (ms % 1000) * 1000000,
   };
   nanosleep(&tv, NULL);
+#endif
 }
